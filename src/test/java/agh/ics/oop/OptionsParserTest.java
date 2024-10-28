@@ -14,5 +14,8 @@ class OptionsParserTest {
 
         final var case2 = new MoveDirection[]{MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT};
         assertArrayEquals( case2, OptionsParser.parseStringArray(new String[]{"f","test", "b","should not be here", "r", "l"}));
-     }
+
+        final var case3 = new MoveDirection[]{};
+        assertArrayEquals( case3, OptionsParser.parseStringArray(new String[]{"wrong", "wrong", "wrong", "wrong", "wrong"}));
+    }
 }
