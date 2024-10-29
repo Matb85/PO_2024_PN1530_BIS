@@ -29,4 +29,8 @@ public class Simulation {
             System.out.println("Zwierzę " + (i % numberOfAnimals) + ": " + animals.get(i % animals.size()).getPosition());
         }
     }
+
+    public List<Animal> getAnimals() {
+        return animals;
+    }
 }
