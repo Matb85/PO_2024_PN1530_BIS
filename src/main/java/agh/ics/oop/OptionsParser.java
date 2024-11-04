@@ -17,7 +17,7 @@ public class OptionsParser {
         }
     }
 
-    public static MoveDirection[] parseStringArray(String[] args){
+    public static List<MoveDirection> parseStringArray(String[] args){
         List<MoveDirection> temp = new ArrayList<>();
         for (String arg: args){
             MoveDirection direction = parseString(arg);
@@ -25,6 +25,6 @@ public class OptionsParser {
                 temp.add(direction);
             }
         }
-        return temp.toArray(new MoveDirection[0]);
+        return temp;
     }
 }
