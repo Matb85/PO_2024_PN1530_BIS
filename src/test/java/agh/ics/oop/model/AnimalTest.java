@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AnimalTest {
 
+    final RectangularMap map = new RectangularMap(4, 4);
+
+
     @Test
     void shouldStartAtCorrectPosition() {
         Animal animal = new Animal();
@@ -16,15 +19,15 @@ class AnimalTest {
     void shouldMoveCorrectly() {
         Animal animal = new Animal();
 
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.FORWARD, map);
         assertEquals(new Vector2d(2, 3), animal.getPosition());
-        animal.move(MoveDirection.RIGHT);
+        animal.move(MoveDirection.RIGHT, map);
         assertEquals(new Vector2d(2, 3), animal.getPosition());
-        animal.move(MoveDirection.BACKWARD);
+        animal.move(MoveDirection.BACKWARD, map);
         assertEquals(new Vector2d(1, 3), animal.getPosition());
-        animal.move(MoveDirection.LEFT);
+        animal.move(MoveDirection.LEFT, map);
         assertEquals(new Vector2d(1, 3), animal.getPosition());
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.FORWARD, map);
         assertEquals(new Vector2d(1, 4), animal.getPosition());
     }
 
@@ -33,15 +36,15 @@ class AnimalTest {
         Animal animal = new Animal();
 
         for (int i = 0; i < 10; i++) {
-            animal.move(MoveDirection.FORWARD);
+            animal.move(MoveDirection.FORWARD, map);
         }
 
         assertEquals(new Vector2d(2, 4), animal.getPosition());
 
-        animal.move(MoveDirection.RIGHT);
+        animal.move(MoveDirection.RIGHT, map);
 
         for (int i = 0; i < 10; i++) {
-            animal.move(MoveDirection.FORWARD);
+            animal.move(MoveDirection.FORWARD, map);
         }
 
         assertEquals(new Vector2d(4, 4), animal.getPosition());
