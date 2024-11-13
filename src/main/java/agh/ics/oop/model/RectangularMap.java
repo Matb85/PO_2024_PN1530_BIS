@@ -1,6 +1,8 @@
 package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.MapVisualizer;
+import agh.ics.oop.model.util.MoveDirection;
+import agh.ics.oop.model.util.Vector2d;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +38,7 @@ public class RectangularMap implements WorldMap {
         return animals.containsKey(position);
     }
 
-    public Animal objectAt(Vector2d position){
+    public WorldElement objectAt(Vector2d position){
         return animals.get(position);
     }
 

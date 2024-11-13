@@ -1,8 +1,8 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.util.MoveDirection;
+import agh.ics.oop.model.util.Vector2d;
 import agh.ics.oop.model.WorldMap;
 
 import java.util.ArrayList;
