@@ -19,7 +19,11 @@ public class Simulation {
         this.map = map;
 
         for(Vector2d position: initialPositions) {
-            animals.add(new Animal(position));
+            final var a = new Animal(position);
+            if(map.canMoveTo(position)) {
+                map.place(a);
+                animals.add(a);
+            }
         }
     }
 
