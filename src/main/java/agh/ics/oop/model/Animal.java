@@ -20,21 +20,21 @@ public class Animal {
     }
 
     public String toString(){
-        return "Pozycja: " + position + ", orientacja: " + orientation;
+        return orientation.toString();
     }
 
     boolean isAt(Vector2d position){
         return this.position.equals(position);
     }
 
-    public void move(MoveDirection direction){
+    public void move(MoveDirection direction, MoveValidator validator){
         switch (direction){
             case RIGHT -> orientation = orientation.next();
             case LEFT -> orientation = orientation.previous();
             case FORWARD -> {
                 Vector2d oldPosition = position;
                 position = position.add(orientation.toUnitVector());
-                if (position.precedes(new Vector2d(4,4)) && position.follows(new Vector2d(0,0))){
+                if (validator.canMoveTo(position)){
                     System.out.println("Zwierzak idzie do przodu z " + oldPosition + " na " + position);
                 } else {
                     position = oldPosition;
@@ -44,7 +44,7 @@ public class Animal {
             case BACKWARD -> {
                 Vector2d oldPosition = position;
                 position = position.subtract(orientation.toUnitVector());
-                if (position.precedes(new Vector2d(4,4)) && position.follows(new Vector2d(0,0))){
+                if (validator.canMoveTo(position)){
                     System.out.println("Zwierzak idzie do tyłu z " + oldPosition + " na " + position);
                 } else {
                     position = oldPosition;
