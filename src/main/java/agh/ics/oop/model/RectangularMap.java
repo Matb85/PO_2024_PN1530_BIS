@@ -16,7 +16,7 @@ public class RectangularMap implements WorldMap {
     }
 
     public boolean place(Animal animal){
-        if (this.isOccupied(animal.getPosition())){
+        if (this.canMoveTo(animal.getPosition())){
             return false;
         }
         animals.put(animal.getPosition(), animal);
