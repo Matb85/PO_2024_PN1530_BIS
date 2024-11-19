@@ -1,8 +1,8 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.util.MoveDirection;
+import agh.ics.oop.model.util.Vector2d;
 import agh.ics.oop.model.WorldMap;
 
 import java.util.ArrayList;
@@ -31,8 +31,8 @@ public class Simulation {
         final var numberOfAnimals = animals.size();
 
         for(int i = 0; i < moves.size(); i++) {
-            animals.get(i % numberOfAnimals).move(moves.get(i), map);
-            System.out.println(map);
+           map.move(animals.get(i % numberOfAnimals), moves.get(i));
+           System.out.println(map);
         }
     }
 

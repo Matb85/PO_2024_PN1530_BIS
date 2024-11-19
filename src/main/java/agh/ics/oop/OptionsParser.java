@@ -1,6 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.util.MoveDirection;
 
 import java.util.ArrayList;
 import java.util.List;

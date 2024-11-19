@@ -1,8 +1,6 @@
-package agh.ics.oop.model;
+package agh.ics.oop.model.util;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
