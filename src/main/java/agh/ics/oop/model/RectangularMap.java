@@ -1,7 +1,6 @@
 package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.MapVisualizer;
-import agh.ics.oop.model.util.MoveDirection;
 import agh.ics.oop.model.util.Vector2d;
 
 import java.util.*;
@@ -26,7 +25,6 @@ public class RectangularMap extends AbstractWorldMap implements WorldMap {
     }
 
     public List<WorldElement> getElements(){
-
         return new ArrayList<>(animals.values());
     }
 }

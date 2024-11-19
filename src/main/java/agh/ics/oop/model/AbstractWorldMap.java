@@ -10,7 +10,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     protected Map<Vector2d, Animal> animals = new HashMap<>();
 
     public boolean canMoveTo(Vector2d position) {
-        return !isOccupied(position);
+        return isOccupied(position);
     }
 
     public boolean isOccupied(Vector2d position) {

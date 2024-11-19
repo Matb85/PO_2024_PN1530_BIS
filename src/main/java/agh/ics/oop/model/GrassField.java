@@ -1,7 +1,6 @@
 package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.MapVisualizer;
-import agh.ics.oop.model.util.MoveDirection;
 import agh.ics.oop.model.util.Vector2d;
 
 import java.util.ArrayList;
@@ -41,6 +40,12 @@ public class GrassField extends AbstractWorldMap implements WorldMap {
         arr.addAll(grasses.values());
 
         return arr;
+    }
+
+    public void placeGrass(Grass grass) {
+        if(!grasses.containsKey(grass.getPosition())) {
+            grasses.put(grass.getPosition(), grass);
+        }
     }
 
     public String toString() {
