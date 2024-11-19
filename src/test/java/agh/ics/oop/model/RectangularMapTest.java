@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.IncorrectPositionException;
 import agh.ics.oop.model.util.Vector2d;
 import org.junit.jupiter.api.Test;
 
@@ -25,15 +26,16 @@ class RectangularMapTest {
     }
 
     @Test
-    void shouldReturnAllElements() {
+    void shouldReturnAllElements() throws IncorrectPositionException {
         RectangularMap map = new RectangularMap(4, 4);
         Animal animal1 = new Animal(new Vector2d(0,0));
         Animal animal2 = new Animal(new Vector2d(2,2));
         Animal animal3 = new Animal(new Vector2d(2,2));
 
-        assertTrue(map.place(animal1));
-        assertTrue(map.place(animal2));
-        assertFalse(map.place(animal3));
+        assertDoesNotThrow(()-> map.place(animal1));
+        assertDoesNotThrow(()-> map.place(animal2));
+        assertThrows(IncorrectPositionException.class, ()-> map.place(animal3));
+
 
         List<WorldElement> elements = map.getElements();
 
