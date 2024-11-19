@@ -26,8 +26,8 @@ class SimulationTest {
 
        final List<Animal> animals = simulation.getAnimals();
 
-        assertEquals(new Vector2d(3, 0), animals.get(0).getPosition());
-        assertEquals(new Vector2d(2, 4), animals.get(1).getPosition());
+        assertEquals(new Vector2d(2, 0), animals.get(0).getPosition());
+        assertEquals(new Vector2d(3, 4), animals.get(1).getPosition());
     }
 
     @Test
@@ -43,7 +43,7 @@ class SimulationTest {
 
         final List<Animal> animals = simulation.getAnimals();
 
-        assertEquals(new Vector2d(3, -1), animals.get(0).getPosition());
-        assertEquals(new Vector2d(2, 7), animals.get(1).getPosition());
+        assertEquals(new Vector2d(2, -1), animals.get(0).getPosition());
+        assertEquals(new Vector2d(3, 7), animals.get(1).getPosition());
     }
 }

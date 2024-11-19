@@ -31,8 +31,8 @@ public class Simulation {
         final var numberOfAnimals = animals.size();
 
         for(int i = 0; i < moves.size(); i++) {
-            animals.get(i % numberOfAnimals).move(moves.get(i), map);
-            System.out.println(map);
+           map.move(animals.get(i % numberOfAnimals), moves.get(i));
+           System.out.println(map);
         }
     }
 

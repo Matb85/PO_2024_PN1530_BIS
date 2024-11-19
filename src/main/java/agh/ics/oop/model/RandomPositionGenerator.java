@@ -2,20 +2,23 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.Vector2d;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class RandomPositionGenerator implements Iterable<Vector2d> {
-    private final int maxWidth;
-    private final int maxHeight;
     private final int grassCount;
 
+    private final ArrayList<Vector2d> allPositions = new ArrayList<>();
+
     public RandomPositionGenerator(int maxWidth, int maxHeight,int grassCount) {
-        this.maxWidth = maxWidth;
-        this.maxHeight = maxHeight;
         this.grassCount = grassCount;
+
+        for(int i = 0; i < maxWidth; i++){
+            for(int j = 0; j < maxHeight; j++){
+                allPositions.add(new Vector2d(i,j));
+            }
+        }
+
+        Collections.shuffle(allPositions);
     }
 
     @Override
@@ -28,20 +31,9 @@ public class RandomPositionGenerator implements Iterable<Vector2d> {
                 return generatedGrass < grassCount;
             }
 
-            private final Set<Vector2d> generatedPositions = new HashSet<>();
-
             @Override
             public Vector2d next() {
-                Random random = new Random();
-                Vector2d position;
-                do {
-                    int x = random.nextInt(maxWidth);
-                    int y = random.nextInt(maxHeight);
-                    position = new Vector2d(x, y);
-                } while (generatedPositions.contains(position));
-                generatedPositions.add(position);
-                generatedGrass++;
-                return position;
+                return allPositions.get(generatedGrass++ % allPositions.size());
             }
         };
     }

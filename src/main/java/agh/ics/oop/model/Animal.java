@@ -31,14 +31,14 @@ public class Animal implements WorldElement {
         return this.position.equals(position);
     }
 
-    public void move(MoveDirection direction, MoveValidator validator){
+    public void move(MoveDirection direction, MoveValidator map){
         switch (direction){
             case RIGHT -> orientation = orientation.next();
             case LEFT -> orientation = orientation.previous();
             case FORWARD -> {
-                Vector2d oldPosition = position;
+                final Vector2d oldPosition = new Vector2d(position.getX(), position.getY());
                 position = position.add(orientation.toUnitVector());
-                if (validator.canMoveTo(position)){
+                if (map.canMoveTo(position)){
                     System.out.println("Zwierzak idzie do przodu z " + oldPosition + " na " + position);
                 } else {
                     position = oldPosition;
@@ -48,7 +48,7 @@ public class Animal implements WorldElement {
             case BACKWARD -> {
                 Vector2d oldPosition = position;
                 position = position.subtract(orientation.toUnitVector());
-                if (validator.canMoveTo(position)){
+                if (map.canMoveTo(position)){
                     System.out.println("Zwierzak idzie do tyłu z " + oldPosition + " na " + position);
                 } else {
                     position = oldPosition;
