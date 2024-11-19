@@ -13,11 +13,11 @@ public class OptionsParser {
             case "b" -> { return MoveDirection.BACKWARD; }
             case "r" -> { return MoveDirection. RIGHT; }
             case "l" -> { return MoveDirection.LEFT; }
-            default -> { return null; }
+            default -> { throw new IllegalArgumentException("Niepoprawny kierunek: " + arg); }
         }
     }
 
-    public static List<MoveDirection> parseStringArray(String[] args){
+    public static List<MoveDirection> parseStringArray(String[] args) throws IllegalArgumentException {
         List<MoveDirection> temp = new ArrayList<>();
         for (String arg: args){
             MoveDirection direction = parseString(arg);

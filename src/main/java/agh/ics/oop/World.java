@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.Animal;
+import agh.ics.oop.model.obervers.ConsoleMapDisplay;
 import agh.ics.oop.model.util.MoveDirection;
 import agh.ics.oop.model.RectangularMap;
 import agh.ics.oop.model.util.Vector2d;
@@ -30,22 +31,12 @@ public class World {
         List<MoveDirection> directions = OptionsParser.parseStringArray(args);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
 
-        var map = new RectangularMap(10, 5);
+        final var map = new RectangularMap(10, 5);
+
+        map.addListener(new ConsoleMapDisplay());
 
         Simulation simulation = new Simulation(positions, directions, map);
+
         simulation.run();
-    }
-
-    private static void run(MoveDirection[] args){
-        System.out.println("zwierzak idzie do przodu");
-
-        for (MoveDirection arg: args){
-            switch (arg){
-                case FORWARD -> System.out.println("zwierzak idzie do przodu");
-                case BACKWARD -> System.out.println("zwierzak idzie do tyłu");
-                case RIGHT-> System.out.println("zwierzak skręca w prawo");
-                case LEFT -> System.out.println("zwierzak skręca w lewo");
-            }
-        }
     }
 }

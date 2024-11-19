@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.Boundary;
 import agh.ics.oop.model.util.MapVisualizer;
 import agh.ics.oop.model.util.Vector2d;
 
@@ -19,12 +20,11 @@ public class RectangularMap extends AbstractWorldMap implements WorldMap {
         return position.precedes(upperRight) && position.follows(lowerLeft) && super.canMoveTo(position);
     }
 
-    public String toString(){
-        MapVisualizer visualizer = new MapVisualizer(this);
-        return visualizer.draw(lowerLeft, upperRight);
-    }
-
     public List<WorldElement> getElements(){
         return new ArrayList<>(animals.values());
+    }
+
+    public Boundary getCurrentBounds(){
+        return new Boundary(lowerLeft, upperRight);
     }
 }

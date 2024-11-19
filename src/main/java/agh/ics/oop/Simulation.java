@@ -21,8 +21,12 @@ public class Simulation {
         for(Vector2d position: initialPositions) {
             final var a = new Animal(position);
             if(map.canMoveTo(position)) {
-                map.place(a);
-                animals.add(a);
+                try {
+                    map.place(a);
+                    animals.add(a);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -32,7 +36,6 @@ public class Simulation {
 
         for(int i = 0; i < moves.size(); i++) {
            map.move(animals.get(i % numberOfAnimals), moves.get(i));
-           System.out.println(map);
         }
     }
 
