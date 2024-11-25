@@ -50,6 +50,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     }
 
     public void place(Animal animal) throws IncorrectPositionException {
+        notify();
         if (!this.canMoveTo(animal.getPosition())) {
             throw new IncorrectPositionException(animal.getPosition());
         }
