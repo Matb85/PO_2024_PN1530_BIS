@@ -33,10 +33,13 @@ public class Simulation {
 
     public void run() {
         final var numberOfAnimals = animals.size();
+        System.out.println("System rozpoczyna symulację");
 
         for(int i = 0; i < moves.size(); i++) {
            map.move(animals.get(i % numberOfAnimals), moves.get(i));
         }
+
+        System.out.println("System zakończył działanie");
     }
 
     public List<Animal> getAnimals() {

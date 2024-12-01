@@ -6,37 +6,41 @@ import agh.ics.oop.model.util.MoveDirection;
 import agh.ics.oop.model.RectangularMap;
 import agh.ics.oop.model.util.Vector2d;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class World {
 
     public static void main(String[] args) {
-        System.out.println("system wystartował");
+        if(true){runSingleSimulation(args);}
+        else{runManySimulations(args);}
+    }
 
-        final var directions1 = OptionsParser.parseStringArray(args);
-        System.out.println(directions1);
-        System.out.println("system zakończył działanie");
-
-        Vector2d position1 = new Vector2d(1,2);
-        System.out.println(position1);
-        Vector2d position2 = new Vector2d(-2,1);
-        System.out.println(position2);
-        System.out.println(position1.add(position2));
-
-        final var a = new Animal();
-        System.out.println(a.getPosition());
-
-        System.out.println("Starting simulation!");
-
+    private static Simulation createSimulation(String[] args, int width, int height) {
+        System.out.println("Tworzenie symulacji dla argumentów: " + String.join(", ", args));
         List<MoveDirection> directions = OptionsParser.parseStringArray(args);
-        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
+        List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
 
-        final var map = new RectangularMap(10, 5);
-
+        final var map = new RectangularMap(width, height);
         map.addListener(new ConsoleMapDisplay());
 
-        Simulation simulation = new Simulation(positions, directions, map);
+        return new Simulation(positions, directions, map);
+    }
 
+    private static void runManySimulations(String[] args) {
+        final var numberOfSimulations = 1000;
+        final List<Simulation> simulations = Stream.of(new Simulation[numberOfSimulations]).map(i -> createSimulation(args, 5, 5)).toList();
+
+        SimulationEngine engine = new SimulationEngine(simulations);
+        engine.runAsync();
+        System.out.println("Zakończono uruchamianie symulacji");
+        engine.awaitSimulationsEnd();
+        System.out.println("Zakończono wszystkie symulacje");
+    }
+
+    private static void runSingleSimulation(String[] args) {
+        Simulation simulation = createSimulation(args, 5, 5);
         simulation.run();
     }
 }
