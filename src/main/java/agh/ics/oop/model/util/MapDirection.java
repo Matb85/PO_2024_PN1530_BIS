@@ -9,10 +9,10 @@ public enum MapDirection {
     @Override
     public String toString() {
         switch (this) {
-            case NORTH -> { return "Północ"; }
-            case EAST -> { return "Wschód"; }
-            case SOUTH -> { return "Południe"; }
-            case WEST -> { return "Zachód"; }
+            case NORTH -> { return "↑"; } // "Północ";
+            case EAST -> { return "→"; } // "Wschód";
+            case SOUTH -> { return "↓"; } // "Południe";
+            case WEST -> { return "←"; } // "Zachód";
             default -> { return null; }
         }
     }
@@ -26,13 +26,13 @@ public enum MapDirection {
         return MapDirection.values()[(this.ordinal() - 1 + 4) % 4];
     }
 
-    public Vector2d toUnitVector(){
+    public Vector2d toUnitVector() throws IllegalStateException {
         switch (this) {
             case NORTH -> { return new Vector2d(0, 1); }
             case EAST -> { return new Vector2d(1, 0); }
             case SOUTH -> { return new Vector2d(0, -1); }
             case WEST -> { return new Vector2d(-1, 0); }
-            default -> { return null; }
+            default -> { throw new IllegalStateException("Unexpected value: " + this); }
         }
     }
 }
