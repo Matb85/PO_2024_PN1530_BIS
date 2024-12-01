@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.Boundary;
 import agh.ics.oop.model.util.MapVisualizer;
 import agh.ics.oop.model.util.Vector2d;
 
@@ -11,9 +12,12 @@ import java.util.Map;
 public class GrassField extends AbstractWorldMap implements WorldMap {
     private final Map<Vector2d, Grass> grasses = new HashMap<>();
     private final int grassCount;
+    private final int maxGrassReach;
+
 
     public GrassField(int grassFields) {
         this.grassCount = grassFields;
+        this.maxGrassReach = (int) Math.sqrt(grassCount);
         generateGrass();
     }
 
@@ -48,11 +52,7 @@ public class GrassField extends AbstractWorldMap implements WorldMap {
         }
     }
 
-    public String toString() {
-        MapVisualizer visualizer = new MapVisualizer(this);
-
-        final int maxGrassReach = (int) Math.sqrt(grassCount);
-
+    public Boundary getCurrentBounds(){
         final Vector2d upperRight = animals.values().stream()
                 .map(Animal::getPosition)
                 .reduce(new Vector2d(maxGrassReach, maxGrassReach),
@@ -63,6 +63,6 @@ public class GrassField extends AbstractWorldMap implements WorldMap {
                 .reduce(new Vector2d(0, 0),
                         (min, pos) -> new Vector2d(Math.min(min.getX(), pos.getX()), Math.min(min.getY(), pos.getY())));
 
-        return visualizer.draw(lowerLeft, upperRight);
+        return new Boundary(lowerLeft, upperRight);
     }
 }
