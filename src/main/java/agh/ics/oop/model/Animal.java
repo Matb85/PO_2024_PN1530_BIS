@@ -39,20 +39,20 @@ public class Animal implements WorldElement {
                 final Vector2d oldPosition = new Vector2d(position.getX(), position.getY());
                 position = position.add(orientation.toUnitVector());
                 if (map.canMoveTo(position)){
-                    System.out.println("Zwierzak idzie do przodu z " + oldPosition + " na " + position);
+                    //System.out.println("Zwierzak idzie do przodu z " + oldPosition + " na " + position);
                 } else {
                     position = oldPosition;
-                    System.out.println("Zwierzak nie może iść do przodu z " + oldPosition + " na " + position);
+                    //System.out.println("Zwierzak nie może iść do przodu z " + oldPosition + " na " + position);
                 }
             }
             case BACKWARD -> {
                 Vector2d oldPosition = position;
                 position = position.subtract(orientation.toUnitVector());
                 if (map.canMoveTo(position)){
-                    System.out.println("Zwierzak idzie do tyłu z " + oldPosition + " na " + position);
+                    //System.out.println("Zwierzak idzie do tyłu z " + oldPosition + " na " + position);
                 } else {
                     position = oldPosition;
-                    System.out.println("Zwierzak nie może iść do tyłu z " + oldPosition + " na " + position);
+                    //System.out.println("Zwierzak nie może iść do tyłu z " + oldPosition + " na " + position);
                 }
             }
         }

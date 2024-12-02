@@ -11,7 +11,7 @@ public class OptionsParser {
         switch (arg){
             case "f" -> { return MoveDirection.FORWARD; }
             case "b" -> { return MoveDirection.BACKWARD; }
-            case "r" -> { return MoveDirection. RIGHT; }
+            case "r" -> { return MoveDirection.RIGHT; }
             case "l" -> { return MoveDirection.LEFT; }
             default -> { throw new IllegalArgumentException("Niepoprawny kierunek: " + arg); }
         }

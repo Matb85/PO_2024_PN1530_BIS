@@ -2,15 +2,18 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractWorldMap implements WorldMap {
     protected Map<Vector2d, Animal> animals = new HashMap<>();
 
     protected List<MapChangeListener> listeners = new ArrayList<>();
+
+    private UUID uuid = UUID.randomUUID();
+
+    public UUID getId() {
+        return uuid;
+    }
 
     public void addListener(MapChangeListener listener) {
         listeners.add(listener);
@@ -45,11 +48,11 @@ public abstract class AbstractWorldMap implements WorldMap {
         if (!oldPos.equals(animal.getPosition())) {
             animals.remove(oldPos);
             animals.put(animal.getPosition(), animal);
-            notifyListeners("Zwierzątko ruszyło się z  " + oldPos + " do " + animal.getPosition());
         }
+        notifyListeners("Zwierzątko ruszyło się z " + oldPos + " do " + animal.getPosition() + ", kierunek ruchu: " + direction + ", obecny kierunek: " + animal.getDirection());
     }
 
-    public void place(Animal animal) throws IncorrectPositionException {
+    public synchronized void place(Animal animal) throws IncorrectPositionException {
         notify();
         if (!this.canMoveTo(animal.getPosition())) {
             throw new IncorrectPositionException(animal.getPosition());
