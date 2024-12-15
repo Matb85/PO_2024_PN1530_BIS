@@ -9,8 +9,7 @@ import agh.ics.oop.model.WorldMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Simulation {
-
+public class Simulation implements Runnable{
     private final List<Animal> animals = new ArrayList<>();
     private final List<MoveDirection> moves;
     private final WorldMap map;
@@ -39,6 +38,12 @@ public class Simulation {
         for(int i = 0; i < moves.size(); i++) {
             if (paused) {
                 break;
+            }
+            try {
+                Thread.sleep(400);
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+                return;
             }
             map.move(animals.get(i % numberOfAnimals), moves.get(i));
             System.out.println(map);

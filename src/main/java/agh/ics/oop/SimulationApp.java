@@ -1,14 +1,10 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.RectangularMap;
-import agh.ics.oop.presenter.SimulationPresenter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import java.util.List;
 
 public class SimulationApp extends Application {
    // List<String> parameters = getParameters().getRaw();
@@ -24,11 +20,6 @@ public class SimulationApp extends Application {
             e.printStackTrace();
             return;
         }
-        SimulationPresenter presenter = loader.getController();
-        RectangularMap map = new RectangularMap(10, 5);
-        presenter.setWorldMap(map);
-        presenter.drawMap();
-
         configureStage(primaryStage, viewRoot);
         primaryStage.show();
     }

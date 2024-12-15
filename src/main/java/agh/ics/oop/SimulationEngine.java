@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -9,7 +10,8 @@ import java.util.concurrent.TimeUnit;
 public class SimulationEngine {
     private final List<Simulation> simulations;
     private CountDownLatch latch;
-    private ExecutorService executorService;
+    private final ExecutorService executorService = Executors.newFixedThreadPool(4);
+    private final List<Thread> simulationThreads = new ArrayList<>();
 
     public SimulationEngine(List<Simulation> simulations) {
         this.simulations = simulations;
@@ -36,7 +38,6 @@ public class SimulationEngine {
 
     public void runAsyncInThreadPool() {
         latch = new CountDownLatch(simulations.size());
-        executorService = Executors.newFixedThreadPool(4);
         for (Simulation simulation : simulations) {
             Runnable task = () -> {
                 try {
@@ -57,7 +58,6 @@ public class SimulationEngine {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } finally {
-            if (executorService != null) {
                 executorService.shutdown();
                 try {
                     if (!executorService.awaitTermination(10, TimeUnit.SECONDS)) {
@@ -67,7 +67,14 @@ public class SimulationEngine {
                     executorService.shutdownNow();
                     Thread.currentThread().interrupt();
                 }
-            }
+        }
+    }
+
+    public void runAsyncWithoutWaitingForFinish() {
+        for (Simulation simulation : simulations) {
+            Thread thread = new Thread(simulation);
+            simulationThreads.add(thread);
+            thread.start();
         }
     }
 }
