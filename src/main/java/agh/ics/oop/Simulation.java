@@ -13,7 +13,6 @@ public class Simulation implements Runnable{
     private final List<Animal> animals = new ArrayList<>();
     private final List<MoveDirection> moves;
     private final WorldMap map;
-    private boolean paused = false;
 
     public Simulation(List<Vector2d> initialPositions, List<MoveDirection> moves, WorldMap map) {
         this.moves = moves;
@@ -36,9 +35,6 @@ public class Simulation implements Runnable{
         final var numberOfAnimals = animals.size();
 
         for(int i = 0; i < moves.size(); i++) {
-            if (paused) {
-                break;
-            }
             try {
                 Thread.sleep(400);
             } catch (InterruptedException e) {
@@ -48,15 +44,6 @@ public class Simulation implements Runnable{
             map.move(animals.get(i % numberOfAnimals), moves.get(i));
             System.out.println(map);
         }
-    }
-
-    public void pause() {
-        paused = true;
-    }
-
-    public void resume() {
-        paused = false;
-        run();
     }
 
     public List<Animal> getAnimals() {
