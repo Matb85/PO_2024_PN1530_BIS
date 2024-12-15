@@ -13,8 +13,11 @@ import java.util.stream.Stream;
 public class World {
 
     public static void main(String[] args) {
-        if(true){runSingleSimulation(args);}
-        else{runManySimulations(args);}
+        switch(1){
+            case 1 -> SimulationApp.launch(SimulationApp.class, args);
+            case 2 -> runSingleSimulation(args);
+            case 3 -> runManySimulations(args);
+        }
     }
 
     private static Simulation createSimulation(String[] args, int width, int height) {
