@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.Animal;
+import agh.ics.oop.model.util.IncorrectPositionException;
 import agh.ics.oop.model.util.MoveDirection;
 import agh.ics.oop.model.util.Vector2d;
 import agh.ics.oop.model.WorldMap;
@@ -8,8 +9,7 @@ import agh.ics.oop.model.WorldMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Simulation {
-
+public class Simulation implements Runnable{
     private final List<Animal> animals = new ArrayList<>();
     private final List<MoveDirection> moves;
     private final WorldMap map;
@@ -23,23 +23,27 @@ public class Simulation {
             if(map.canMoveTo(position)) {
                 try {
                     map.place(a);
-                    animals.add(a);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (IncorrectPositionException e) {
+                    throw new RuntimeException(e);
                 }
+                animals.add(a);
             }
         }
     }
 
     public void run() {
         final var numberOfAnimals = animals.size();
-        System.out.println("System rozpoczyna symulację");
 
         for(int i = 0; i < moves.size(); i++) {
-           map.move(animals.get(i % numberOfAnimals), moves.get(i));
+            try {
+                Thread.sleep(400);
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+                return;
+            }
+            map.move(animals.get(i % numberOfAnimals), moves.get(i));
+            System.out.println(map);
         }
-
-        System.out.println("System zakończył działanie");
     }
 
     public List<Animal> getAnimals() {
